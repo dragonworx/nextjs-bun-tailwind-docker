@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "composite": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "types": ["bun-types", "@types/bun"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@lib/*": ["src/lib/*"],
+      "@components/*": ["src/lib/components/*"],
+      "@dashboard/*": ["src/dashboard/*"],
+      "@routes/*": ["src/routes/*"],
+      "@config/*": ["config/*"],
+      "@assets/*": ["assets/*"]
+    }
+  },
+  "include": ["src/**/*", "src/types/**/*.d.ts", "config/**/*"]
+}

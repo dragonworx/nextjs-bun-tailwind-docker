@@ -1,0 +1,107 @@
+.endpoint-list-component {
+  display: block;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.endpoints-section {
+  h2 {
+    margin: 0 0 1.5rem 0;
+    color: #1a1a1a;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .endpoint {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    transition: background-color 0.2s, transform 0.2s;
+    animation: slideIn 0.3s ease-out;
+    animation-fill-mode: both;
+
+    &:hover {
+      background: #f1f3f5;
+      transform: translateX(4px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &[data-delay="0"] { animation-delay: 0.1s; }
+    &[data-delay="1"] { animation-delay: 0.2s; }
+    &[data-delay="2"] { animation-delay: 0.3s; }
+    &[data-delay="3"] { animation-delay: 0.4s; }
+  }
+
+  .method {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 50px;
+    text-align: center;
+
+    &.GET {
+      background: #10b981;
+      color: white;
+    }
+
+    &.POST {
+      background: #3b82f6;
+      color: white;
+    }
+
+    &.PUT {
+      background: #f59e0b;
+      color: white;
+    }
+
+    &.DELETE {
+      background: #ef4444;
+      color: white;
+    }
+  }
+
+  .path {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    font-weight: 500;
+    flex: 0 0 auto;
+    min-width: 150px;
+  }
+
+  .description {
+    color: #666;
+    font-size: 0.875rem;
+    flex: 1;
+  }
+
+  .separator {
+    color: #cbd5e0;
+    margin: 0 0.5rem;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

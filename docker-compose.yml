@@ -1,0 +1,27 @@
+services:
+  # Development service with hot reloading for both server and client
+  web-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"  # Vite dev server (main entry point)
+      - "3001:3001"  # Bun API server
+    volumes:
+      # Mount the entire project directory for hot reloading
+      - .:/app
+      # Preserve node_modules from the container
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: bun run dev:local
+
+  # Production service
+  web-prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
