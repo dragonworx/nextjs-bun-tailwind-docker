@@ -1,12 +1,11 @@
 services:
-  # Development service with hot reloading for both server and client
+  # Development service with hot reloading
   web-dev:
     build:
       context: .
       target: development
     ports:
-      - "3000:3000"  # Vite dev server (main entry point)
-      - "3001:3001"  # Bun API server
+      - "3000:3000"  # Next.js dev server
     volumes:
       # Mount the entire project directory for hot reloading
       - .:/app
@@ -14,7 +13,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    command: bun run dev:local
+    command: bun run dev
 
   # Production service
   web-prod:
