@@ -58,8 +58,9 @@ const posts: Record<string, Post> = {
   }
 }
 
-export default function PostDetailPage({ params }: { params: { slug: string } }) {
-  const post = posts[params.slug]
+export default async function PostDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params
+  const post = posts[resolvedParams.slug]
 
   if (!post) {
     return (
@@ -67,7 +68,7 @@ export default function PostDetailPage({ params }: { params: { slug: string } })
         <Header />
         <main style={{ padding: '2rem', fontFamily: 'system-ui', maxWidth: '800px', margin: '0 auto' }}>
           <h1>Post Not Found</h1>
-          <p>No post found with slug: {params.slug}</p>
+          <p>No post found with slug: {resolvedParams.slug}</p>
           <Link href="/" style={{ color: '#4f46e5' }}>← Back to Home</Link>
         </main>
       </>
@@ -107,7 +108,7 @@ export default function PostDetailPage({ params }: { params: { slug: string } })
         <div style={{ marginTop: '2rem' }}>
           <Card variant="info">
             <p style={{ margin: 0 }}>
-              This is a dynamic route. The URL parameter <code>[slug]</code> is: <strong>{params.slug}</strong>
+              This is a dynamic route. The URL parameter <code>[slug]</code> is: <strong>{resolvedParams.slug}</strong>
             </p>
           </Card>
         </div>

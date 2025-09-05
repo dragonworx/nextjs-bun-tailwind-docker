@@ -66,8 +66,9 @@ const users: Record<string, User> = {
   }
 }
 
-export default function UserDetailPage({ params }: { params: { id: string } }) {
-  const user = users[params.id]
+export default async function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
+  const user = users[resolvedParams.id]
 
   if (!user) {
     return (
@@ -75,7 +76,7 @@ export default function UserDetailPage({ params }: { params: { id: string } }) {
         <Header />
         <main style={{ padding: '2rem', fontFamily: 'system-ui', maxWidth: '1200px', margin: '0 auto' }}>
           <h1>User Not Found</h1>
-          <p>No user found with ID: {params.id}</p>
+          <p>No user found with ID: {resolvedParams.id}</p>
           <Link href="/users" style={{ color: '#4f46e5' }}>← Back to Users</Link>
         </main>
       </>
@@ -131,7 +132,7 @@ export default function UserDetailPage({ params }: { params: { id: string } }) {
 
         <div style={{ marginTop: '2rem' }}>
           <p style={{ color: '#6b7280' }}>
-            This is a dynamic route. The URL parameter <code>[id]</code> is: <strong>{params.id}</strong>
+            This is a dynamic route. The URL parameter <code>[id]</code> is: <strong>{resolvedParams.id}</strong>
           </p>
         </div>
       </main>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import bike from '@assets/img/bike.jpg';
 
 interface Route {
   path: string
@@ -45,31 +46,25 @@ export default function Header() {
   }
 
   return (
-    <nav style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      padding: '1rem 2rem',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '1rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ color: 'white', fontSize: '1.25rem', fontWeight: 'bold' }}>
-            🚀 Fantoccini 3D
+    <nav className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 backdrop-blur-md px-4 sm:px-8 py-4 shadow-2xl sticky top-0 z-50 border-b border-white/10 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 animate-pulse"></div>
+      <div className="absolute -top-2 -left-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl animate-bounce"></div>
+      <div className="absolute -top-2 -right-4 w-20 h-20 bg-purple-500/20 rounded-full blur-xl animate-bounce" style={{animationDelay: '1s'}}></div>
+      
+      <div className="relative max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
+        <div className="flex items-center gap-4 group">
+          <div className="text-white text-xl sm:text-2xl font-black flex items-center gap-3 group-hover:scale-105 transition-transform duration-300">
+            <span className="text-2xl sm:text-3xl animate-bounce">🚀</span>
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
+              Fantoccini 3D
+            </span>
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-ping ml-2"></div>
           </div>
         </div>
         
-        <nav style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          {routes.map(route => {
+        <nav className="flex gap-1 sm:gap-2 flex-wrap items-center">
+          {routes.map((route, index) => {
             const isActive = pathname === route.path || 
                            (route.path !== '/' && pathname.startsWith(route.path.split('/[')[0]))
             
@@ -77,30 +72,19 @@ export default function Header() {
               <Link
                 key={route.path}
                 href={route.path}
-                style={{
-                  color: 'white',
-                  textDecoration: 'none',
-                  padding: '0.5rem 1rem',
-                  transition: 'background 0.2s',
-                  borderRadius: '6px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  background: isActive ? 'rgba(255,255,255,0.2)' : 'transparent'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = 'transparent'
-                  }
-                }}
+                className={`relative text-white no-underline px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 rounded-xl inline-flex items-center gap-2 font-medium text-sm sm:text-base group overflow-hidden ${
+                  isActive 
+                    ? 'bg-gradient-to-r from-blue-500/40 to-purple-500/40 backdrop-blur-sm border border-white/30 shadow-xl shadow-purple-500/25 scale-105' 
+                    : 'hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 hover:scale-105'
+                }`}
+                style={{animationDelay: `${index * 0.1}s`}}
               >
-                <span style={{ fontSize: '0.875rem', opacity: 0.8 }}>{getRouteIcon(route.type)}</span>
-                {route.label}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className={`text-lg transition-transform duration-300 group-hover:scale-110 ${isActive ? 'animate-bounce' : ''}`}>
+                  {getRouteIcon(route.type)}
+                </span>
+                <span className="hidden sm:inline relative z-10">{route.label}</span>
+                {isActive && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 animate-pulse"></div>}
               </Link>
             )
           })}
