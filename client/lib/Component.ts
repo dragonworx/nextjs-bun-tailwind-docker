@@ -2,10 +2,10 @@
  * Base class for components that use HTML template files with state management
  * Allows mounting components directly to DOM without web components
  */
-export abstract class TemplateComponent<T extends HTMLElement = HTMLDivElement, S = any> {
+export abstract class Component<T extends HTMLElement = HTMLDivElement, S = any> {
   protected _element: T;
   protected _template: string;
-  protected _children: Map<string, TemplateComponent> = new Map();
+  protected _children: Map<string, Component> = new Map();
   protected _eventListeners: Array<{ target: Element; event: string; handler: EventListener }> = [];
   private _state: S;
 
@@ -156,9 +156,9 @@ export abstract class TemplateComponent<T extends HTMLElement = HTMLDivElement, 
   }
 
   /**
-   * Add child component
+   * Add a child component
    */
-  protected addChild(key: string, child: TemplateComponent, selector?: string): void {
+  protected addChild(key: string, child: Component, selector?: string): void {
     this._children.set(key, child);
 
     if (selector) {
@@ -171,9 +171,9 @@ export abstract class TemplateComponent<T extends HTMLElement = HTMLDivElement, 
   }
 
   /**
-   * Get child component by key
+   * Get a child component by key
    */
-  protected getChild(key: string): TemplateComponent | undefined {
+  protected getChild(key: string): Component | undefined {
     return this._children.get(key);
   }
 

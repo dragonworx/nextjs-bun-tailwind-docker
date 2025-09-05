@@ -36,7 +36,7 @@ The project uses TypeScript path aliases for clean imports:
 - `@assets/` → `assets/`
 
 ### Component Architecture
-Components use the `TemplateComponent` base class from `@lib/components/TemplateComponent` which provides:
+Components use the `Component` base class from `@lib/components/Component` which provides:
 - State management with TypeScript generics
 - Automatic re-rendering
 - Lifecycle hooks
@@ -45,7 +45,7 @@ Components use the `TemplateComponent` base class from `@lib/components/Template
 
 ### Import Conventions
 - Use relative imports for components within the same route: `./components/MyComponent/MyComponent`
-- Use path aliases for shared utilities: `@lib/components/TemplateComponent`
+- Use path aliases for shared utilities: `@lib/components/Component`
 - Use path aliases for config: `@config/ports`
 
 ### Adding New Routes

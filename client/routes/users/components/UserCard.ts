@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 
 interface User {
   id: string;
@@ -10,7 +10,7 @@ interface UserCardState {
   user: User;
 }
 
-export class UserCard extends TemplateComponent<HTMLAnchorElement, UserCardState> {
+export class UserCard extends Component<HTMLAnchorElement, UserCardState> {
   constructor(user: User) {
     super('', 'a');
     this.setState({ user });

@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@components/TemplateComponent';
+import { Component } from '@lib/Component';
 import templateHtml from './StatCard.html';
 import './StatCard.css';
 
@@ -10,7 +10,7 @@ interface StatCardState {
   unit?: string;
 }
 
-export class StatCard extends TemplateComponent<HTMLElement, StatCardState> {
+export class StatCard extends Component<HTMLElement, StatCardState> {
   constructor(initialData: StatCardState) {
     super(template, 'div');
     this.addClass('stat-card-component');

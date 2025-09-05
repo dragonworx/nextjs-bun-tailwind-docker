@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@components/TemplateComponent';
+import { Component } from '@lib/Component';
 import templateHtml from './EndpointList.html';
 import './EndpointList.css';
 
@@ -14,7 +14,7 @@ interface EndpointListState {
   endpoints: Endpoint[];
 }
 
-export class EndpointList extends TemplateComponent<HTMLElement, EndpointListState> {
+export class EndpointList extends Component<HTMLElement, EndpointListState> {
   constructor(endpoints?: Endpoint[]) {
     super(template, 'div');
     this.addClass('endpoint-list-component');

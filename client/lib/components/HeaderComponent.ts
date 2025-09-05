@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface Route {
   path: string;
@@ -15,7 +15,7 @@ interface HeaderState {
 // Singleton to prevent multiple headers
 let globalHeaderInstance: HeaderComponent | null = null;
 
-export class HeaderComponent extends TemplateComponent<HTMLElement, HeaderState> {
+export class HeaderComponent extends Component<HTMLElement, HeaderState> {
   private navigationUpdateHandler = () => {
     this.setState({ currentPath: window.location.pathname });
   };

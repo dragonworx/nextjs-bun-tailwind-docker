@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface Post {
   title: string;
@@ -12,7 +12,7 @@ interface BlogPostState {
   slug: string;
 }
 
-export class BlogPost extends TemplateComponent<HTMLElement, BlogPostState> {
+export class BlogPost extends Component<HTMLElement, BlogPostState> {
   constructor(post: Post, slug: string) {
     super('', 'article');
     this.setState({

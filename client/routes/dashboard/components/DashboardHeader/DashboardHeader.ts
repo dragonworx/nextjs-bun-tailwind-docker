@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@components/TemplateComponent';
+import { Component } from '@lib/Component';
 import templateHtml from './DashboardHeader.html';
 import './DashboardHeader.css';
 
@@ -9,7 +9,7 @@ interface HeaderState {
   status: 'running' | 'stopped';
 }
 
-export class DashboardHeader extends TemplateComponent<HTMLElement, HeaderState> {
+export class DashboardHeader extends Component<HTMLElement, HeaderState> {
   constructor(port: string) {
     super(template, 'div');
     this.addClass('dashboard-header-component');

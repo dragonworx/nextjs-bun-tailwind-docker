@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Hero } from '@lib/components/Hero';
 import { Card } from '@lib/components/Card';
 import { LinkList } from '@lib/components/LinkList';
@@ -15,7 +15,7 @@ interface UsersPageState {
   initialized: boolean;
 }
 
-export class UsersPage extends TemplateComponent<HTMLDivElement, UsersPageState> {
+export class UsersPage extends Component<HTMLDivElement, UsersPageState> {
   private hero: Hero;
   private userCards: UserCard[] = [];
   private dynamicRoutesCard: Card;

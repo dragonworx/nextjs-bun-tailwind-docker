@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Hero } from '@lib/components/Hero';
 import { Card } from '@lib/components/Card';
 import { LinkList } from '@lib/components/LinkList';
@@ -7,7 +7,7 @@ interface ApiDocsPageState {
   initialized: boolean;
 }
 
-export class ApiDocsPage extends TemplateComponent<HTMLDivElement, ApiDocsPageState> {
+export class ApiDocsPage extends Component<HTMLDivElement, ApiDocsPageState> {
   private hero: Hero;
   private endpointsCard: Card;
   private dynamicRoutesCard: Card;

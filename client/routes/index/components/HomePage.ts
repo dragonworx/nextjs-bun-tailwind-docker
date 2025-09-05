@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Hero } from '@lib/components/Hero';
 import { Card } from '@lib/components/Card';
 import { LinkList } from '@lib/components/LinkList';
@@ -7,7 +7,7 @@ interface HomePageState {
   initialized: boolean;
 }
 
-export class HomePage extends TemplateComponent<HTMLDivElement, HomePageState> {
+export class HomePage extends Component<HTMLDivElement, HomePageState> {
   private hero: Hero;
   private staticRoutesCard: Card;
   private userRoutesCard: Card;

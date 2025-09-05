@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface User {
   name: string;
@@ -12,7 +12,7 @@ interface UserProfileState {
   userId: string;
 }
 
-export class UserProfile extends TemplateComponent<HTMLDivElement, UserProfileState> {
+export class UserProfile extends Component<HTMLDivElement, UserProfileState> {
   constructor(user: User, userId: string) {
     super('', 'div');
     this.setState({

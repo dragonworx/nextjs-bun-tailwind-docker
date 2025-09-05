@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@components/TemplateComponent';
+import { Component } from '@lib/Component';
 import templateHtml from './UserCard.html';
 import './UserCard.css';
 
@@ -15,9 +15,9 @@ interface UserData {
 
 /**
  * Example component using HTML template file
- * Demonstrates how to extend TemplateComponent and use external HTML
+ * Demonstrates how to extend Component and use external HTML
  */
-export class UserCard extends TemplateComponent<HTMLElement> {
+export class UserCard extends Component<HTMLElement> {
   private userData: UserData;
   private isFollowing: boolean = false;
 

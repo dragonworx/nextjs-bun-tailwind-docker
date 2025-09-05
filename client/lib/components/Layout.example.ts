@@ -7,7 +7,7 @@
  */
 
 import { Layout } from './Layout';
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 // Example 1: Basic usage with default options
 async function basicLayoutExample() {
@@ -31,7 +31,7 @@ async function customLayoutExample() {
   });
   
   // Mount a custom component
-  class MyPageComponent extends TemplateComponent {
+  class MyPageComponent extends Component {
     protected processTemplate(): string {
       return '<div><h1>Custom Page</h1><p>Content goes here</p></div>';
     }
@@ -68,7 +68,7 @@ async function multipleChildrenExample() {
   layout.appendChild(content);
   
   // Or mount a main component that manages its own children
-  class PageWithSections extends TemplateComponent {
+  class PageWithSections extends Component {
     protected processTemplate(): string {
       return `
         <section>

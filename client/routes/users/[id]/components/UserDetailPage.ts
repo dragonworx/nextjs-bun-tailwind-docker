@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Card } from '@lib/components/Card';
 import { LinkList } from '@lib/components/LinkList';
 import { UserProfile } from '@lib/components/UserProfile';
@@ -18,7 +18,7 @@ interface UserDetailPageState {
   initialized: boolean;
 }
 
-export class UserDetailPage extends TemplateComponent<HTMLDivElement, UserDetailPageState> {
+export class UserDetailPage extends Component<HTMLDivElement, UserDetailPageState> {
   private userProfile: UserProfile | null = null;
   private infoCard: Card;
   private backLinks: LinkList;

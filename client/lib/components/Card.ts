@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface CardState {
   title?: string;
@@ -6,7 +6,7 @@ interface CardState {
   variant?: 'default' | 'gradient' | 'terminal' | 'info';
 }
 
-export class Card extends TemplateComponent<HTMLDivElement, CardState> {
+export class Card extends Component<HTMLDivElement, CardState> {
   constructor(content: string, title?: string, variant: CardState['variant'] = 'default') {
     super('', 'div');
     this.setState({ content, title, variant });

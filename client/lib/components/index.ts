@@ -1,5 +1,5 @@
 // Base component
-export { TemplateComponent } from './TemplateComponent';
+export { Component } from '../Component';
 
 // Shared UI components
 export { Card } from './Card';

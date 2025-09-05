@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Card } from '@lib/components/Card';
 import { LinkList } from '@lib/components/LinkList';
 import { BlogPost } from '@lib/components/BlogPost';
@@ -19,7 +19,7 @@ interface PostDetailPageState {
   initialized: boolean;
 }
 
-export class PostDetailPage extends TemplateComponent<HTMLDivElement, PostDetailPageState> {
+export class PostDetailPage extends Component<HTMLDivElement, PostDetailPageState> {
   private blogPost: BlogPost | null = null;
   private otherPostsCard: Card;
   private backLinks: LinkList;

@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface HeroState {
   title: string;
@@ -6,7 +6,7 @@ interface HeroState {
   gradient?: boolean;
 }
 
-export class Hero extends TemplateComponent<HTMLDivElement, HeroState> {
+export class Hero extends Component<HTMLDivElement, HeroState> {
   constructor(title: string, subtitle?: string, gradient: boolean = false) {
     super('', 'div');
     // Set the actual state after super() constructor completes

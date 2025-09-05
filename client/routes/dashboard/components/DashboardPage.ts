@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { DashboardHeader } from './DashboardHeader/DashboardHeader';
 import { StatCard } from './StatCard/StatCard';
 import { EndpointList } from './EndpointList/EndpointList';
@@ -16,7 +16,7 @@ interface DashboardPageState {
   initialized: boolean;
 }
 
-export class DashboardPage extends TemplateComponent<HTMLDivElement, DashboardPageState> {
+export class DashboardPage extends Component<HTMLDivElement, DashboardPageState> {
   private statsInterval: number | null = null;
   private startTime: number = Date.now();
 

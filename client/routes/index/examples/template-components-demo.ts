@@ -4,7 +4,7 @@ import { UserCard } from '../components/UserCard/UserCard';
  * Demo of template-based components
  * Shows how to create, mount, and interact with components
  */
-export function runTemplateComponentsDemo() {
+export function runComponentsDemo() {
   console.log('Running Template Components Demo...');
 
   // Sample user data

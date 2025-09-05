@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface CodeBlockState {
   code: string;
@@ -6,7 +6,7 @@ interface CodeBlockState {
   title?: string;
 }
 
-export class CodeBlock extends TemplateComponent<HTMLDivElement, CodeBlockState> {
+export class CodeBlock extends Component<HTMLDivElement, CodeBlockState> {
   constructor(code: string, language?: string, title?: string) {
     super('', 'div');
     this.setState({

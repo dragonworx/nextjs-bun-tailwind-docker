@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 
 interface LinkItem {
   href: string;
@@ -12,7 +12,7 @@ interface LinkListState {
   listStyle?: 'default' | 'nav' | 'terminal';
 }
 
-export class LinkList extends TemplateComponent<HTMLDivElement, LinkListState> {
+export class LinkList extends Component<HTMLDivElement, LinkListState> {
   constructor(items: LinkItem[], title?: string, listStyle: LinkListState['listStyle'] = 'default') {
     super('', 'div');
     this.setState({ items, title, listStyle });

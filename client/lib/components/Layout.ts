@@ -1,4 +1,4 @@
-import { TemplateComponent } from './TemplateComponent';
+import { Component } from '../Component';
 import { HeaderComponent } from './HeaderComponent';
 
 interface LayoutOptions {
@@ -16,7 +16,7 @@ interface LayoutState {
  * Base Layout component that provides consistent structure for all routes
  * Uses a slot-based approach where child content is inserted into the layout
  */
-export class Layout extends TemplateComponent<HTMLDivElement, LayoutState> {
+export class Layout extends Component<HTMLDivElement, LayoutState> {
   private header: HeaderComponent | null = null;
   private slotElement: HTMLElement | null = null;
 
@@ -91,7 +91,7 @@ export class Layout extends TemplateComponent<HTMLDivElement, LayoutState> {
   /**
    * Mount a child component into the layout's slot
    */
-  public mountChild(child: TemplateComponent | HTMLElement): void {
+  public mountChild(child: Component | HTMLElement): void {
     if (!this.slotElement) {
       // Try to get the slot element if not already cached
       this.slotElement = this.$('#layout-slot');
@@ -106,7 +106,7 @@ export class Layout extends TemplateComponent<HTMLDivElement, LayoutState> {
     this.slotElement.innerHTML = '';
 
     // Mount the child
-    if (child instanceof TemplateComponent) {
+    if (child instanceof Component) {
       child.mount(this.slotElement);
     } else {
       this.slotElement.appendChild(child);
@@ -116,7 +116,7 @@ export class Layout extends TemplateComponent<HTMLDivElement, LayoutState> {
   /**
    * Append a child component to the layout's slot without clearing existing content
    */
-  public appendChild(child: TemplateComponent | HTMLElement): void {
+  public appendChild(child: Component | HTMLElement): void {
     if (!this.slotElement) {
       // Try to get the slot element if not already cached
       this.slotElement = this.$('#layout-slot');
@@ -127,7 +127,7 @@ export class Layout extends TemplateComponent<HTMLDivElement, LayoutState> {
       }
     }
 
-    if (child instanceof TemplateComponent) {
+    if (child instanceof Component) {
       child.mount(this.slotElement);
     } else {
       this.slotElement.appendChild(child);

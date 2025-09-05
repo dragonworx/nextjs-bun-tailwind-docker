@@ -1,4 +1,4 @@
-import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { Component } from '@lib/Component';
 import { Hero } from '@lib/components/Hero';
 import { Card } from '@lib/components/Card';
 import { CodeBlock } from '@lib/components/CodeBlock';
@@ -19,7 +19,7 @@ interface ApiRoutePageState {
   initialized: boolean;
 }
 
-export class ApiRoutePage extends TemplateComponent<HTMLDivElement, ApiRoutePageState> {
+export class ApiRoutePage extends Component<HTMLDivElement, ApiRoutePageState> {
   private hero: Hero;
   private requestDetailsCard: Card;
   private exampleRoutesCard: Card;
