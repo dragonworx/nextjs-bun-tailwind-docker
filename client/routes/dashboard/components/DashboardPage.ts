@@ -1,9 +1,9 @@
-// Import template components
-import { DashboardHeader } from './components/DashboardHeader/DashboardHeader';
-import { StatCard } from './components/StatCard/StatCard';
-import { EndpointList } from './components/EndpointList/EndpointList';
+import { TemplateComponent } from '@lib/components/TemplateComponent';
+import { DashboardHeader } from './DashboardHeader/DashboardHeader';
+import { StatCard } from './StatCard/StatCard';
+import { EndpointList } from './EndpointList/EndpointList';
+import { HeaderComponent } from '@lib/components/HeaderComponent';
 import { PORTS } from '@config/ports';
-import './styles/dashboard.css';
 
 interface ServerStats {
   uptime: number;
@@ -12,11 +12,15 @@ interface ServerStats {
   responseTime: number;
 }
 
-class DashboardApp {
+interface DashboardPageState {
+  initialized: boolean;
+}
+
+export class DashboardPage extends TemplateComponent<HTMLDivElement, DashboardPageState> {
   private statsInterval: number | null = null;
   private startTime: number = Date.now();
 
-  // Component instances - initialize as undefined until created
+  // Component instances
   private header: DashboardHeader;
   private uptimeCard: StatCard;
   private requestsCard: StatCard;
@@ -25,22 +29,29 @@ class DashboardApp {
   private endpointList: EndpointList;
 
   constructor() {
-    this.init();
+    super('', 'div');
+    this.setState({ initialized: false });
   }
 
-  private init() {
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.setupDashboard());
-    } else {
-      this.setupDashboard();
-    }
+  protected processTemplate(template: string): string {
+    return `
+      <div id="dashboard">
+        <div id="header-container"></div>
+        <div id="stats-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;"></div>
+        <div id="endpoints-container"></div>
+      </div>
+    `;
   }
 
-  private setupDashboard() {
-    const app = document.getElementById('dashboard');
-    if (!app) return;
+  protected async onMount(): Promise<void> {
+    await this.setupDashboard();
+  }
 
+  private async setupDashboard(): Promise<void> {
+    // Add global header at the top
+    const globalHeader = await HeaderComponent.create();
+    globalHeader.mountAtTop();
+    
     // Create and mount components
     this.createComponents();
     this.mountComponents();
@@ -48,9 +59,11 @@ class DashboardApp {
 
     // Start polling for stats
     this.startStatsPolling();
+    
+    this.setState({ initialized: true });
   }
 
-  private createComponents() {
+  private createComponents(): void {
     // Create component instances
     this.header = new DashboardHeader(String(PORTS.API));
 
@@ -78,11 +91,11 @@ class DashboardApp {
     this.endpointList = new EndpointList();
   }
 
-  private mountComponents() {
+  private mountComponents(): void {
     // Mount components to their containers
     this.header.mount('#header-container');
 
-    const statsContainer = document.getElementById('stats-container');
+    const statsContainer = this.$('#stats-container');
     if (statsContainer) {
       this.uptimeCard.mount(statsContainer);
       this.requestsCard.mount(statsContainer);
@@ -93,7 +106,7 @@ class DashboardApp {
     this.endpointList.mount('#endpoints-container');
   }
 
-  private bindEvents() {
+  protected bindEvents(): void {
     // Listen for endpoint clicks
     this.endpointList?.element.addEventListener('endpoint-click', (e: Event) => {
       const customEvent = e as CustomEvent;
@@ -102,7 +115,7 @@ class DashboardApp {
     });
   }
 
-  private startStatsPolling() {
+  private startStatsPolling(): void {
     // Initial update
     this.updateStats();
 
@@ -112,7 +125,7 @@ class DashboardApp {
     }, 2000);
   }
 
-  private async updateStats() {
+  private async updateStats(): Promise<void> {
     try {
       const response = await fetch('/api/stats');
 
@@ -131,7 +144,7 @@ class DashboardApp {
     }
   }
 
-  private updateWithMockData() {
+  private updateWithMockData(): void {
     // Calculate uptime based on when the page loaded
     const uptimeSeconds = Math.floor((Date.now() - this.startTime) / 1000);
 
@@ -145,7 +158,7 @@ class DashboardApp {
     this.updateStatCards(mockStats);
   }
 
-  private updateStatCards(stats: ServerStats) {
+  private updateStatCards(stats: ServerStats): void {
     this.uptimeCard.setValue(this.formatUptime(stats.uptime));
     this.requestsCard.setValue(this.formatNumber(stats.requests));
     this.connectionsCard.setValue(String(stats.connections));
@@ -168,7 +181,7 @@ class DashboardApp {
     return String(num);
   }
 
-  public destroy() {
+  protected onUnmount(): void {
     if (this.statsInterval) {
       clearInterval(this.statsInterval);
       this.statsInterval = null;
@@ -183,11 +196,3 @@ class DashboardApp {
     this.endpointList?.unmount();
   }
 }
-
-// Initialize the dashboard app
-const dashboardApp = new DashboardApp();
-
-// Cleanup on page unload
-window.addEventListener('unload', () => {
-  dashboardApp.destroy();
-});

@@ -47,6 +47,25 @@ const server: Server = Bun.serve({
         });
       }
     }
+    // API routes endpoint - list all available routes
+    else if (path === '/api/routes') {
+      const routes = [
+        { path: '/', label: 'Home', type: 'static' },
+        { path: '/dashboard', label: 'Dashboard', type: 'static' },
+        { path: '/api-docs', label: 'API Docs', type: 'static' },
+        { path: '/users', label: 'Users List', type: 'static' },
+        { path: '/users/[id]', label: 'User Details', type: 'dynamic' },
+        { path: '/posts/[slug]', label: 'Blog Post', type: 'dynamic' },
+        { path: '/api/[...path]', label: 'API Gateway', type: 'api' },
+      ];
+      
+      response = new Response(JSON.stringify({ 
+        routes,
+        timestamp: new Date().toISOString(),
+      }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
     // API stats endpoint
     else if (path === '/api/stats') {
       const uptime = Math.floor((Date.now() - serverStats.startTime) / 1000);

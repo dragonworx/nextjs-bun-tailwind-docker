@@ -6,6 +6,8 @@ interface RouteFile {
   path: string;
   filePath: string;
   htmlPath?: string;
+  isDynamic?: boolean;
+  pattern?: string;
 }
 
 function scanRoutes(routesDir: string, basePath = ''): RouteFile[] {
@@ -38,10 +40,14 @@ function scanRoutes(routesDir: string, basePath = ''): RouteFile[] {
         
         if (hasMain || hasHtml) {
           const routePath = basePath + '/' + entry;
+          const isDynamic = entry.includes('[') && entry.includes(']');
+          
           routes.push({
             path: routePath === '/index' ? '/' : routePath,
             filePath: hasMain ? mainTs : '',
-            htmlPath: hasHtml ? indexHtml : undefined
+            htmlPath: hasHtml ? indexHtml : undefined,
+            isDynamic,
+            pattern: isDynamic ? routePath : undefined
           });
         }
         
@@ -66,6 +72,13 @@ function generateHtmlForRoute(route: RouteFile): string {
   const routeName = route.path === '/' ? 'index' : route.path.replace(/^\//, '');
   const title = routeName.charAt(0).toUpperCase() + routeName.slice(1);
   
+  const scriptPath = route.filePath.replace(process.cwd(), '');
+  const routerScript = route.isDynamic ? 
+    `<script type="module">
+      import { router } from '/src/lib/router.ts';
+      router.register('${route.pattern}');
+    </script>` : '';
+  
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -75,12 +88,13 @@ function generateHtmlForRoute(route: RouteFile): string {
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="${route.filePath.replace(process.cwd(), '')}"></script>
+    ${routerScript}
+    <script type="module" src="${scriptPath}"></script>
   </body>
 </html>`;
 }
 
-export function fileBasedRoutesPlugin(routesDir: string = 'src/routes'): Plugin {
+export function fileBasedRoutesPlugin(routesDir: string = 'client/routes'): Plugin {
   let routes: RouteFile[] = [];
   const fullRoutesDir = resolve(process.cwd(), routesDir);
   
@@ -160,8 +174,22 @@ export function fileBasedRoutesPlugin(routesDir: string = 'src/routes'): Plugin 
         // Remove query parameters and trailing slashes
         const cleanUrl = req.url.split('?')[0].replace(/\/$/, '') || '/';
         
-        // Find matching route
-        const route = routes.find(r => r.path === cleanUrl);
+        // Find matching route (exact match first, then dynamic)
+        let route = routes.find(r => !r.isDynamic && r.path === cleanUrl);
+        
+        if (!route) {
+          // Try to match dynamic routes
+          for (const r of routes.filter(r => r.isDynamic)) {
+            const pattern = r.pattern!.replace(/\[(\.\.\.)?\w+\]/g, (match) => {
+              return match.startsWith('[...') ? '.*' : '[^/]+';
+            });
+            const regex = new RegExp('^' + pattern.replace(/\//g, '\\/') + '$');
+            if (regex.test(cleanUrl)) {
+              route = r;
+              break;
+            }
+          }
+        }
         
         if (route) {
           try {

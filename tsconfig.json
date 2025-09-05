@@ -17,17 +17,17 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "types": ["bun-types", "@types/bun"],
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["./node_modules/@types", "./client/types"],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "@lib/*": ["src/lib/*"],
-      "@components/*": ["src/lib/components/*"],
-      "@dashboard/*": ["src/dashboard/*"],
-      "@routes/*": ["src/routes/*"],
+      "@/*": ["client/*"],
+      "@lib/*": ["client/lib/*"],
+      "@components/*": ["client/lib/components/*"],
+      "@dashboard/*": ["client/dashboard/*"],
+      "@routes/*": ["client/routes/*"],
       "@config/*": ["config/*"],
       "@assets/*": ["assets/*"]
     }
   },
-  "include": ["src/**/*", "src/types/**/*.d.ts", "config/**/*"]
+  "include": ["client/**/*", "client/types/**/*.d.ts", "config/**/*"]
 }

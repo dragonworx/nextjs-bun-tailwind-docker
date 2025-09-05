@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { PORTS } from './config/ports';
-import { htmlStringPlugin } from './src/lib/vite-plugin-html-string';
-import { fileBasedRoutesPlugin } from './src/lib/vite-plugin-file-routes';
-import { getRouteEntries } from './src/lib/vite-build-routes';
+import { htmlStringPlugin } from './vite/vite-plugin-html-string';
+import { fileBasedRoutesPlugin } from './vite/vite-plugin-file-routes';
+import { getRouteEntries } from './vite/vite-build-routes';
 
 export default defineConfig({
   root: './',
@@ -11,13 +11,13 @@ export default defineConfig({
   publicDir: 'assets',
   plugins: [
     htmlStringPlugin(),
-    fileBasedRoutesPlugin('src/routes'),
+    fileBasedRoutesPlugin('client/routes'),
   ],
   build: {
     outDir: 'public',
     emptyOutDir: true,
     rollupOptions: {
-      input: getRouteEntries('src/routes'),
+      input: getRouteEntries('client/routes'),
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -29,11 +29,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
-      '@lib': resolve(__dirname, './src/lib'),
-      '@components': resolve(__dirname, './src/lib/components'),
-      '@dashboard': resolve(__dirname, './src/dashboard'),
-      '@routes': resolve(__dirname, './src/routes'),
+      '@': resolve(__dirname, './client'),
+      '@lib': resolve(__dirname, './client/lib'),
+      '@components': resolve(__dirname, './client/lib/components'),
+      '@dashboard': resolve(__dirname, './client/dashboard'),
+      '@routes': resolve(__dirname, './client/routes'),
       '@config': resolve(__dirname, './config'),
       '@assets': resolve(__dirname, './assets'),
     },
