@@ -65,8 +65,9 @@ pnpm-lock.yaml
 # Zed
 .zed/
 
-# Claude
+# AI
 .claude/
+.playwright-mcp/
 
 # Docker
 .dockerignore
