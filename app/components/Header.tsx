@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import bike from '@assets/img/bike.jpg';
-import data from '@assets/data.json';
 
 interface Route {
   path: string
@@ -13,10 +11,6 @@ interface Route {
 }
 
 export default function Header() {
-  useEffect(() => {
-    console.log(data);
-  }, []);
-
   const pathname = usePathname()
   const [routes, setRoutes] = useState<Route[]>([
     { path: '/', label: 'Home', type: 'static' },
@@ -63,7 +57,7 @@ export default function Header() {
             <span className="text-2xl sm:text-3xl animate-bounce">🚀</span>
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
               Fantoccini 3D
-              <img src={bike.src} alt="Bike" className="inline-block w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover ml-2" />
+              <img src='/bike.jpg' alt="Bike" className="inline-block w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover ml-2" />
             </span>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-ping ml-2"></div>
           </div>
