@@ -56,7 +56,7 @@ export default function Header() {
           <div className="text-white text-xl sm:text-2xl font-black flex items-center gap-3 group-hover:scale-105 transition-transform duration-300">
             <span className="text-2xl sm:text-3xl animate-bounce">🚀</span>
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
-              Fantoccini 3D
+              Fantoccini 3Ds
               <img src='/bike.jpg' alt="Bike" className="inline-block w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover ml-2" />
             </span>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-ping ml-2"></div>
