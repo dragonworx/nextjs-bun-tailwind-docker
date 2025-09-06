@@ -18,9 +18,9 @@ export default function Hero({ title, subtitle }: HeroProps) {
       
       {/* Floating elements */}
       <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-purple-400/30 to-pink-500/30 rounded-full blur-xl animate-bounce" style={{animationDuration: '3s'}}></div>
-      <div className="absolute top-20 right-20 w-16 h-16 bg-white/10 rounded-full blur-lg animate-ping" style={{animationDuration: '2s'}}></div>
-      <div className="absolute bottom-20 left-20 w-12 h-12 bg-yellow-400/20 rounded-full blur-md animate-pulse" style={{animationDelay: '1s'}}></div>
+      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-purple-400/30 to-pink-500/30 rounded-full blur-xl animate-bounce [animation-duration:3s]"></div>
+      <div className="absolute top-20 right-20 w-16 h-16 bg-white/10 rounded-full blur-lg animate-ping [animation-duration:2s]"></div>
+      <div className="absolute bottom-20 left-20 w-12 h-12 bg-yellow-400/20 rounded-full blur-md animate-pulse [animation-delay:1s]"></div>
       
       <div className="relative z-10">
         <div className="mb-6">

@@ -11,8 +11,8 @@ export default function HomePage() {
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 rounded-full blur-3xl animate-ping" style={{animationDuration: '4s'}}></div>
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl animate-pulse [animation-delay:2s]"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 rounded-full blur-3xl animate-ping [animation-duration:4s]"></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto">
@@ -21,7 +21,7 @@ export default function HomePage() {
             subtitle="This application demonstrates file-based routing with dynamic parameters."
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10 mt-16">
             <Card>
               <div className="relative">
                 <h3 className="text-2xl font-bold text-gray-800 mt-0 mb-4 flex items-center gap-3 group">
@@ -88,7 +88,7 @@ export default function HomePage() {
             </Card>
           </div>
 
-          <div className="mt-16">
+          <div className="mt-20">
             <Card variant="info">
               <h3 className="text-2xl font-bold text-white mt-0 mb-6 flex items-center gap-3">
                 <span className="text-3xl">🚀</span> Features Demonstrated

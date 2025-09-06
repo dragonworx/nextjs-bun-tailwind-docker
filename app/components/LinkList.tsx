@@ -14,30 +14,19 @@ interface LinkListProps {
 
 export default function LinkList({ items }: LinkListProps) {
   return (
-    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+    <ul className="list-none p-0 m-0 space-y-3">
       {items.map((item, index) => (
-        <li key={index} style={{ marginBottom: '0.75rem' }}>
+        <li key={index}>
           <Link 
             href={item.href}
-            style={{
-              display: 'block',
-              padding: '0.75rem',
-              borderRadius: '6px',
-              textDecoration: 'none',
-              transition: 'background 0.2s',
-              background: 'rgba(99, 102, 241, 0.05)',
-              border: '1px solid rgba(99, 102, 241, 0.1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(99, 102, 241, 0.1)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(99, 102, 241, 0.05)'
-            }}
+            className="group block p-4 rounded-xl no-underline transition-all duration-300 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 border border-indigo-100/60 hover:from-indigo-100/90 hover:to-purple-100/90 hover:border-indigo-200 hover:shadow-lg hover:scale-[1.02] transform"
           >
-            <div style={{ color: '#4f46e5', fontWeight: 500 }}>{item.label}</div>
+            <div className="text-indigo-600 font-semibold text-base group-hover:text-indigo-700 transition-colors duration-200 flex items-center gap-2">
+              <div className="w-2 h-2 bg-indigo-400 rounded-full group-hover:bg-indigo-500 transition-colors duration-200"></div>
+              {item.label}
+            </div>
             {item.description && (
-              <div style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+              <div className="text-gray-600 text-sm mt-1 pl-4 group-hover:text-gray-700 transition-colors duration-200">
                 {item.description}
               </div>
             )}

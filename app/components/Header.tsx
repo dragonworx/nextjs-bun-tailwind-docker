@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import bike from '@assets/img/bike.jpg';
+import data from '@assets/data.json';
 
 interface Route {
   path: string
@@ -12,6 +13,10 @@ interface Route {
 }
 
 export default function Header() {
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
   const pathname = usePathname()
   const [routes, setRoutes] = useState<Route[]>([
     { path: '/', label: 'Home', type: 'static' },
@@ -46,11 +51,11 @@ export default function Header() {
   }
 
   return (
-    <nav className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 backdrop-blur-md px-4 sm:px-8 py-4 shadow-2xl sticky top-0 z-50 border-b border-white/10 overflow-hidden">
+    <nav className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 backdrop-blur-md px-4 sm:px-8 py-4 shadow-2xl border-b border-white/10 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 animate-pulse"></div>
       <div className="absolute -top-2 -left-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl animate-bounce"></div>
-      <div className="absolute -top-2 -right-4 w-20 h-20 bg-purple-500/20 rounded-full blur-xl animate-bounce" style={{animationDelay: '1s'}}></div>
+      <div className="absolute -top-2 -right-4 w-20 h-20 bg-purple-500/20 rounded-full blur-xl animate-bounce [animation-delay:1s]"></div>
       
       <div className="relative max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
         <div className="flex items-center gap-4 group">
@@ -58,6 +63,7 @@ export default function Header() {
             <span className="text-2xl sm:text-3xl animate-bounce">🚀</span>
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
               Fantoccini 3D
+              <img src={bike.src} alt="Bike" className="inline-block w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover ml-2" />
             </span>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-ping ml-2"></div>
           </div>
@@ -77,7 +83,7 @@ export default function Header() {
                     ? 'bg-gradient-to-r from-blue-500/40 to-purple-500/40 backdrop-blur-sm border border-white/30 shadow-xl shadow-purple-500/25 scale-105' 
                     : 'hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 hover:scale-105'
                 }`}
-                style={{animationDelay: `${index * 0.1}s`}}
+                style={{'--animation-delay': `${index * 0.1}s`} as React.CSSProperties}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className={`text-lg transition-transform duration-300 group-hover:scale-110 ${isActive ? 'animate-bounce' : ''}`}>

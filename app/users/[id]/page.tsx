@@ -74,10 +74,20 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
     return (
       <>
         <Header />
-        <main style={{ padding: '2rem', fontFamily: 'system-ui', maxWidth: '1200px', margin: '0 auto' }}>
-          <h1>User Not Found</h1>
-          <p>No user found with ID: {resolvedParams.id}</p>
-          <Link href="/users" style={{ color: '#4f46e5' }}>← Back to Users</Link>
+        <main className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 px-6 sm:px-8 py-12 font-sans">
+          <div className="max-w-5xl mx-auto">
+            <Card variant="warning">
+              <div className="text-center py-8">
+                <div className="text-6xl mb-6">👤</div>
+                <h1 className="text-3xl font-bold text-white mb-4">User Not Found</h1>
+                <p className="text-white/90 text-lg mb-8">No user found with ID: <code className="bg-white/20 px-2 py-1 rounded font-mono">{resolvedParams.id}</code></p>
+                <Link href="/users" className="inline-flex items-center gap-2 text-white bg-white/20 hover:bg-white/30 px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105 border border-white/30">
+                  <span className="text-xl">←</span>
+                  Back to Users
+                </Link>
+              </div>
+            </Card>
+          </div>
         </main>
       </>
     )
@@ -86,54 +96,114 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
   return (
     <>
       <Header />
-      <main style={{ padding: '2rem', fontFamily: 'system-ui', maxWidth: '1200px', margin: '0 auto' }}>
-        <Link href="/users" style={{ color: '#4f46e5', textDecoration: 'none' }}>← Back to Users</Link>
-        
-        <h1 style={{ marginTop: '1rem' }}>User Details</h1>
-        
-        <div style={{ display: 'grid', gap: '1rem', marginTop: '2rem' }}>
-          <Card>
-            <h2 style={{ marginTop: 0, color: '#4f46e5' }}>{user.name}</h2>
-            <div style={{ display: 'grid', gap: '0.5rem', marginTop: '1rem' }}>
-              <div><strong>Email:</strong> {user.email}</div>
-              <div>
-                <strong>Role:</strong>{' '}
-                <span style={{
-                  background: user.role === 'Admin' ? '#ef4444' : user.role === 'Moderator' ? '#f59e0b' : '#10b981',
-                  color: 'white',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '9999px',
-                  fontSize: '0.75rem',
-                  marginLeft: '0.5rem'
-                }}>
-                  {user.role}
-                </span>
-              </div>
-              <div><strong>User ID:</strong> {user.id}</div>
-              <div><strong>Joined:</strong> {user.joinDate}</div>
-              <div><strong>Last Active:</strong> {user.lastActive}</div>
-            </div>
-          </Card>
-
-          <Card variant="info">
-            <h3 style={{ marginTop: 0 }}>Activity Statistics</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{user.posts}</div>
-                <div style={{ opacity: 0.9 }}>Posts</div>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold' }}>{user.comments}</div>
-                <div style={{ opacity: 0.9 }}>Comments</div>
-              </div>
-            </div>
-          </Card>
+      <main className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 px-6 sm:px-8 py-12 font-sans">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-purple-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl animate-pulse [animation-delay:2s]"></div>
         </div>
 
-        <div style={{ marginTop: '2rem' }}>
-          <p style={{ color: '#6b7280' }}>
-            This is a dynamic route. The URL parameter <code>[id]</code> is: <strong>{resolvedParams.id}</strong>
-          </p>
+        <div className="relative max-w-5xl mx-auto">
+          <Link href="/users" className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold text-lg mb-8 group transition-all duration-200 hover:scale-105">
+            <span className="text-xl group-hover:transform group-hover:-translate-x-1 transition-transform duration-200">←</span>
+            Back to Users
+          </Link>
+          
+          <div className="mb-8">
+            <h1 className="text-4xl sm:text-5xl font-black bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent leading-tight">
+              User Details
+            </h1>
+          </div>
+          
+          <div className="grid gap-8 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-6">
+              <Card>
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+                      {user.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h2 className="mt-0 mb-2 text-3xl font-bold text-indigo-600">{user.name}</h2>
+                      <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${
+                        user.role === 'Admin' ? 'bg-red-100 text-red-700' : 
+                        user.role === 'Moderator' ? 'bg-amber-100 text-amber-700' : 
+                        'bg-emerald-100 text-emerald-700'
+                      }`}>
+                        <div className={`w-2 h-2 rounded-full mr-2 ${
+                          user.role === 'Admin' ? 'bg-red-400' : 
+                          user.role === 'Moderator' ? 'bg-amber-400' : 
+                          'bg-emerald-400'
+                        }`}></div>
+                        {user.role}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+                    <span className="text-xl">📧</span>
+                    <div>
+                      <div className="text-sm font-medium text-gray-600">Email</div>
+                      <div className="font-semibold text-gray-800">{user.email}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
+                    <span className="text-xl">🆔</span>
+                    <div>
+                      <div className="text-sm font-medium text-gray-600">User ID</div>
+                      <div className="font-semibold text-gray-800">#{user.id}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-lg border border-emerald-100">
+                    <span className="text-xl">📅</span>
+                    <div>
+                      <div className="text-sm font-medium text-gray-600">Joined</div>
+                      <div className="font-semibold text-gray-800">{user.joinDate}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border border-orange-100">
+                    <span className="text-xl">⚡</span>
+                    <div>
+                      <div className="text-sm font-medium text-gray-600">Last Active</div>
+                      <div className="font-semibold text-gray-800">{user.lastActive}</div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="space-y-6">
+              <Card variant="info">
+                <h3 className="mt-0 mb-6 text-2xl font-bold text-white flex items-center gap-2">
+                  <span className="text-2xl">📊</span>
+                  Activity Stats
+                </h3>
+                <div className="space-y-4">
+                  <div className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+                    <div className="text-4xl font-black text-yellow-300 mb-2">{user.posts}</div>
+                    <div className="text-white/90 font-semibold">Posts Created</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+                    <div className="text-4xl font-black text-yellow-300 mb-2">{user.comments}</div>
+                    <div className="text-white/90 font-semibold">Comments Made</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <Card variant="success">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🚀</span>
+                <p className="m-0 text-white/95 text-lg">
+                  This is a dynamic route. The URL parameter <code className="bg-white/20 px-2 py-1 rounded font-mono text-yellow-300">[id]</code> is: <strong className="text-yellow-300">{resolvedParams.id}</strong>
+                </p>
+              </div>
+            </Card>
+          </div>
         </div>
       </main>
     </>

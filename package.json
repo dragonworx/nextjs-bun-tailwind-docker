@@ -15,11 +15,10 @@
     "docker:prod": "docker-compose up web-prod"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.3.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.9.2"
   },
   "dependencies": {
