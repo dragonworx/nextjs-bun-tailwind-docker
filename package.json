@@ -12,7 +12,8 @@
     "docker:clean": "docker-compose down -v --remove-orphans && docker-compose rm -f",
     "docker:fresh": "bun run docker:clean && bun run docker:dev",
     "docker:build": "docker-compose build web-prod",
-    "docker:prod": "docker-compose up web-prod"
+    "docker:prod": "docker-compose up web-prod",
+    "kill3000": "lsof -ti :3000 | xargs -r kill -9 2>/dev/null || echo 'Port 3000 is free'"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",
