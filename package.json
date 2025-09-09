@@ -1,5 +1,5 @@
 {
-  "name": "fantoccini-3d",
+  "name": "nextjs-bun-tailwind-docker",
   "version": "0.0.1",
   "description": "Make and shake",
   "scripts": {
@@ -25,7 +25,6 @@
     "@types/react-dom": "^19.1.9",
     "next": "^15.5.2",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "three": "^0.179.1"
+    "react-dom": "^19.1.1"
   }
 }

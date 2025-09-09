@@ -1,56 +1,69 @@
-# Fantoccini-3D Codebase Overview
+# Next.js + Bun + Tailwind + Docker Template
 
-This is a **Three.js-based 3D web application** built with TypeScript, Bun, and Vite. The project follows a file-based routing architecture with custom template components.
+This is a **Next.js web application** built with TypeScript, Bun, and Tailwind CSS. The project uses Next.js App Router for routing and React for component architecture.
 
 ### Tech Stack
-- **Runtime**: Bun (v1.2.21+)
+- **Framework**: Next.js (v15.5.2)
+- **Runtime**: Bun
 - **Language**: TypeScript (v5.9.2)
-- **Build Tool**: Vite (v7.1.3)
-- **3D Library**: Three.js (v0.179.1)
+- **UI Library**: React (v19.1.1)
+- **Styling**: Tailwind CSS (v3.4.0)
 - **Containerization**: Docker & Docker Compose
 
 ### Architecture
 
-**Server** (`server/server.ts`):
-- Bun HTTP server running on port 3001
-- Serves API endpoints and dashboard
-- Tracks server statistics (requests, connections, response times)
-- Proxies development requests to Vite dev server
+**Application**:
+- Next.js App Router for file-based routing
+- React components with TypeScript
+- Server-side rendering and client-side hydration
+- API routes through Next.js API endpoints
 
-**Client** (`client/`):
-- File-based routing system in `client/routes/`
-- Custom template component system with HTML string imports
-- Routes include: index, dashboard, users, posts, api-docs
-- Component-based architecture with TypeScript classes
-
-**Build System**:
-- Custom Vite plugins for HTML string imports and file-based routing
-- Multi-page app with separate entry points per route
-- Path aliases configured (@lib, @components, @routes, etc.)
+**Styling**:
+- Tailwind CSS for utility-first styling
+- PostCSS for CSS processing
+- Responsive design support
 
 ### Key Features
-- **Custom Component System**: Template components extending base classes with HTML/CSS imports
-- **File-Based Routing**: Automatic route generation from directory structure
+- **React Components**: Modern React 19 with hooks and functional components
+- **File-Based Routing**: Next.js App Router for automatic route generation
 - **Docker Support**: Containerized development and production environments
-- **Hot Reload**: Development server with hot module replacement
+- **Hot Reload**: Next.js Fast Refresh for instant updates
+- **TypeScript**: Full type safety across the application
 
 ### Project Structure
 ```
 fantoccini-3d/
-├── server/          # Bun backend server
-├── client/          # Frontend application
-│   ├── lib/         # Shared components & utilities
-│   └── routes/      # File-based routing pages
-├── vite/            # Custom Vite plugins
-├── config/          # Configuration files
-├── assets/          # Static assets
-└── public/          # Build output directory
+├── app/             # Next.js App Router pages and layouts
+├── components/      # Reusable React components
+├── lib/             # Utility functions and shared code
+├── public/          # Static assets
+├── styles/          # Global styles and Tailwind config
+└── docker/          # Docker configuration files
 ```
 
 ### Development Commands
-- `bun run dev`: Docker development environment
-- `bun run dev:local`: Local development (server + client)
-- `bun run build`: Production build
-- `bun run docker:prod`: Production Docker container
+- `bun run dev`: Start Next.js development server with Bun
+- `bun run dev:local`: Alternative local development command
+- `bun run build`: Build for production
+- `bun run start`: Start production server
+- `bun run lint`: Run Next.js linter
+- `bun run docker:dev`: Run development environment in Docker
+- `bun run docker:prod`: Run production environment in Docker
+- `bun run docker:build`: Build production Docker image
+- `bun run docker:clean`: Clean Docker containers and volumes
+- `bun run docker:fresh`: Fresh Docker development start
 
-The codebase appears to be in active development with recent changes to the routing system and component architecture.
+### Dependencies
+
+**Production:**
+- Next.js: v15.5.2
+- React: v19.1.1
+- React DOM: v19.1.1
+
+**Development:**
+- TypeScript: v5.9.2
+- Tailwind CSS: v3.4.0
+- PostCSS: v8.5.6
+- @types/node: v24.3.1
+- @types/react: v19.1.12
+- @types/react-dom: v19.1.9

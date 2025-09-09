@@ -1,62 +1,80 @@
 # Project Structure
 
-## File-Based Routing Convention
+## Next.js App Router Convention
 
-This project uses a file-based routing system similar to Next.js where routes are organized in the `src/routes/` directory.
+This project uses Next.js 15 with the App Router, where routes are organized in the `app/` directory following Next.js conventions.
 
-### Route Structure
+### Directory Structure
 ```
-src/routes/
-├── {route-name}/
-│   ├── index.html          # HTML template for the route
-│   ├── main.ts            # Main entry point for the route
-│   ├── components/        # Components specific to this route
-│   │   └── {Component}/
-│   │       ├── Component.html
-│   │       ├── Component.css
-│   │       └── Component.ts
-│   ├── styles/           # Route-specific styles
-│   └── examples/         # Route-specific demos/examples
+fantoccini-3d/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout component
+│   ├── page.tsx           # Home page component
+│   ├── globals.css        # Global styles
+│   ├── components/        # Shared components
+│   ├── api/               # API routes
+│   ├── dashboard/         # Dashboard route
+│   ├── api-docs/          # API documentation route
+│   ├── posts/             # Posts routes
+│   └── users/             # Users routes
+├── public/                # Static assets
+├── node_modules/          # Dependencies
+├── .next/                 # Next.js build output
+└── docker files...        # Docker configuration
 ```
 
 ### Current Routes
-- `/` → `src/routes/index/` - Main landing page
-- `/dashboard` → `src/routes/dashboard/` - Server dashboard with stats
-- `/api-docs` → `src/routes/api-docs/` - API documentation
-
-### Path Aliases
-The project uses TypeScript path aliases for clean imports:
-
-- `@/` → `src/`
-- `@lib/` → `src/lib/`
-- `@components/` → `src/lib/components/`
-- `@dashboard/` → `src/dashboard/` (deprecated)
-- `@routes/` → `src/routes/`
-- `@config/` → `config/`
-- `@assets/` → `assets/`
+- `/` → `app/page.tsx` - Main landing page
+- `/dashboard` → `app/dashboard/` - Dashboard page
+- `/api-docs` → `app/api-docs/` - API documentation
+- `/posts` → `app/posts/` - Posts pages
+- `/users` → `app/users/` - Users pages
+- `/api/*` → `app/api/` - API endpoints
 
 ### Component Architecture
-Components use the `Component` base class from `@lib/components/Component` which provides:
-- State management with TypeScript generics
-- Automatic re-rendering
-- Lifecycle hooks
-- Event binding
-- DOM utilities
-
-### Import Conventions
-- Use relative imports for components within the same route: `./components/MyComponent/MyComponent`
-- Use path aliases for shared utilities: `@lib/components/Component`
-- Use path aliases for config: `@config/ports`
-
-### Adding New Routes
-1. Create a new directory in `src/routes/{route-name}/`
-2. Add `main.ts` (required) and optionally `index.html`
-3. Components go in `{route-name}/components/`
-4. The route will automatically be available at `/{route-name}`
+Components use React 19 with TypeScript for type safety and modern React patterns including:
+- Functional components with hooks
+- Server and client components
+- TypeScript for type safety
+- Tailwind CSS for styling
 
 ### Technologies
-- **Build System**: Vite with TypeScript
+- **Framework**: Next.js v15.5.2
 - **Runtime**: Bun
-- **Styling**: Modern CSS with nested rules
-- **Components**: Custom template-based system
-- **Routing**: Custom file-based routing plugin
+- **UI Library**: React v19.1.1
+- **Language**: TypeScript v5.9.2
+- **Styling**: Tailwind CSS v3.4.0
+- **CSS Processing**: PostCSS v8.5.6
+- **Containerization**: Docker & Docker Compose
+
+### Development Setup
+
+#### Scripts
+- `bun run dev` - Start Next.js development server
+- `bun run build` - Build for production
+- `bun run start` - Start production server
+- `bun run lint` - Run linter
+- `bun run docker:dev` - Run in Docker development mode
+- `bun run docker:prod` - Run in Docker production mode
+- `bun run docker:build` - Build Docker production image
+- `bun run docker:clean` - Clean Docker environment
+- `bun run docker:fresh` - Fresh Docker development start
+
+### Adding New Routes
+1. Create a new directory in `app/{route-name}/`
+2. Add `page.tsx` for the route component
+3. Optionally add `layout.tsx` for custom layout
+4. Add any route-specific components in the directory
+5. The route will automatically be available at `/{route-name}`
+
+### API Routes
+API routes follow Next.js conventions:
+- Create directories under `app/api/`
+- Add `route.ts` files for API endpoints
+- Export named functions for HTTP methods (GET, POST, etc.)
+
+### Styling Approach
+- Tailwind CSS utility classes for component styling
+- Global styles in `app/globals.css`
+- Component-specific styles using CSS modules or Tailwind classes
+- Responsive design with Tailwind's responsive utilities
