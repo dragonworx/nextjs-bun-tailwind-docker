@@ -32,7 +32,7 @@ This is a **Next.js web application** built with TypeScript, Bun, and Tailwind C
 
 ### Project Structure
 ```
-fantoccini-3d/
+my-project/
 ├── app/             # Next.js App Router pages and layouts
 ├── components/      # Reusable React components
 ├── lib/             # Utility functions and shared code

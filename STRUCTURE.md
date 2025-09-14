@@ -6,7 +6,7 @@ This project uses Next.js 15 with the App Router, where routes are organized in 
 
 ### Directory Structure
 ```
-fantoccini-3d/
+my-project/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx         # Root layout component
 │   ├── page.tsx           # Home page component
